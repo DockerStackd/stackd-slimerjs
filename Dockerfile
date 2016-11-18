@@ -1,7 +1,7 @@
 FROM alpine:3.4
 MAINTAINER Alan Bondarchuk <imacoda@gmail.com>
 
-RUN apk upgrade --update && apk add nodejs && \
+RUN apk upgrade --update && apk add nodejs python && \
   npm install -g npm && \
   apk del curl make gcc g++ linux-headers paxctl gnupg libgcc libstdc++ && \
 
