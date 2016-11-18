@@ -6,7 +6,7 @@ RUN apk upgrade --update && apk add nodejs dbus firefox-esr fontconfig python tt
   apk del curl make gcc g++ linux-headers paxctl gnupg libgcc libstdc++ && \
 
   # Install packages
-  npm install -g phantomjs casperjs slimerjs && \
+  npm install -g util phantomjs casperjs slimerjs && \
 
   # Remove unused
   rm -rf /etc/ssl /SHASUMS256.txt.asc /usr/include \
