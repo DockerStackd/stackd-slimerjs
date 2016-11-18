@@ -6,7 +6,7 @@ RUN apk upgrade --update && apk add nodejs libc6-compat libstdc++ libgcc libxren
   apk del curl make gcc g++ linux-headers paxctl gnupg && \
 
   # Install packages
-  npm install -g util slimerjs casperjs@1.1-beta5 && \
+  npm install -g util slimerjs casperjs@1.1.0-beta5 && \
 
   # Remove unused
   rm -rf /etc/ssl /SHASUMS256.txt.asc /usr/include \
