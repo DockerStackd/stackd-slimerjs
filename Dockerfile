@@ -3,7 +3,7 @@ MAINTAINER Alan Bondarchuk <imacoda@gmail.com>
 
 RUN apk upgrade --update && apk add nodejs && \
   npm install -g npm && \
-  apk del curl make gcc g++ python linux-headers paxctl gnupg libgcc libstdc++ && \
+  apk del curl make gcc g++ linux-headers paxctl gnupg libgcc libstdc++ && \
 
   # Install packages
   npm install -g phantomjs casperjs slimerjs && \
