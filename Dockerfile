@@ -1,12 +1,12 @@
 FROM alpine:latest
 MAINTAINER Alan Bondarchuk <imacoda@gmail.com>
 
-RUN apk upgrade --update && apk add nodejs dbus firefox-esr fontconfig python ttf-freefont xvfb && \
+RUN apk upgrade --update && apk add nodejs libc6-compat libstdc++ libgcc libxrender dbus firefox-esr fontconfig python ttf-freefont xvfb && \
   npm install -g npm && \
-  apk del curl make gcc g++ linux-headers paxctl gnupg libgcc libstdc++ && \
+  apk del curl make gcc g++ linux-headers paxctl gnupg && \
 
   # Install packages
-  npm install -g util phantomjs casperjs slimerjs && \
+  npm install -g util slimerjs casperjs@1.1-beta5 && \
 
   # Remove unused
   rm -rf /etc/ssl /SHASUMS256.txt.asc /usr/include \
