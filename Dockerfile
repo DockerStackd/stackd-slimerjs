@@ -1,4 +1,4 @@
-FROM alpine:3.4
+FROM alpine:latest
 MAINTAINER Alan Bondarchuk <imacoda@gmail.com>
 
 RUN apk upgrade --update && apk add nodejs dbus firefox-esr fontconfig python ttf-freefont xvfb && \
