@@ -1,7 +1,7 @@
 FROM alpine:latest
 MAINTAINER Alan Bondarchuk <imacoda@gmail.com>
 
-RUN apk upgrade --update && apk add nodejs libc6-compat libstdc++ libgcc libxrender dbus firefox-esr fontconfig python ttf-freefont xvfb && \
+RUN apk upgrade --update && apk add bash nodejs libc6-compat libstdc++ libgcc libxrender dbus firefox-esr fontconfig python ttf-freefont xvfb && \
   npm install -g npm && \
   apk del curl make gcc g++ linux-headers paxctl gnupg && \
 
