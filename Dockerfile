@@ -19,7 +19,7 @@ RUN \
   echo '#!/bin/bash\nxvfb-run /srv/var/slimerjs/slimerjs "$@"' > /srv/var/slimerjs/slimerjs.sh && \
   chmod 755 /srv/var/slimerjs/slimerjs.sh && \
   ln -s /srv/var/slimerjs/slimerjs.sh /usr/bin/slimerjs && \
-  wget -O /tmp/casperjs-$CASPERJS_VERSION_F.zip https://github.com/casperjs/casperjs/archive/$CASPERJS_VERSION_F.zip
+  wget -O /tmp/casperjs-$CASPERJS_VERSION_F.zip https://github.com/casperjs/casperjs/archive/$CASPERJS_VERSION_F.zip && \
   unzip /tmp/casperjs-$CASPERJS_VERSION_F.zip -d /tmp && \
   rm -f /tmp/casperjs-$CASPERJS_VERSION_F.zip && \
   mv /tmp/slimerjs-$CASPERJS_VERSION_F/ /srv/var/casperjs && \
