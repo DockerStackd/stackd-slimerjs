@@ -1,28 +1,30 @@
-FROM alpine:latest
+FROM ubuntu:14.04
+
 MAINTAINER Alan Bondarchuk <imacoda@gmail.com>
 
-RUN apk upgrade --update && apk add bash nodejs libc6-compat libstdc++ libgcc libxrender dbus firefox-esr fontconfig python ttf-freefont xvfb && \
-  npm install -g npm && \
-  apk del curl make gcc g++ linux-headers paxctl gnupg && \
+# Env
+ENV SLIMERJS_VERSION_F 0.10.1
+ENV CASPERJS_VERSION_F 1.1.3
 
-  # Install packages
-  npm install -g phantomjs slimerjs casperjs && \
+# Commands
+RUN \
+  apt-get update && \
+  apt-get upgrade -y && \
+  apt-get install -y unzip git wget xvfb libxrender-dev libasound2 libdbus-glib-1-2 libgtk2.0-0 bzip2 python firefox && \
+  mkdir -p /srv/var && \
+  wget -O /tmp/slimerjs-$SLIMERJS_VERSION_F.zip http://download.slimerjs.org/releases/$SLIMERJS_VERSION_F/slimerjs-$SLIMERJS_VERSION_F.zip && \
+  unzip /tmp/slimerjs-$SLIMERJS_VERSION_F.zip -d /tmp && \
+  rm -f /tmp/slimerjs-$SLIMERJS_VERSION_F.zip && \
+  mv /tmp/slimerjs-$SLIMERJS_VERSION_F/ /srv/var/slimerjs && \
+  echo '#!/bin/bash\nxvfb-run /srv/var/slimerjs/slimerjs "$@"' > /srv/var/slimerjs/slimerjs.sh && \
+  chmod 755 /srv/var/slimerjs/slimerjs.sh && \
+  ln -s /srv/var/slimerjs/slimerjs.sh /usr/bin/slimerjs && \
+  wget -O /srv/var/casperjs https://github.com/casperjs/casperjs/archive/$CASPERJS_VERSION_F.zip
+  echo '#!/bin/bash\n/srv/var/casperjs/bin/casperjs --engine=slimerjs "$@"' >> /srv/var/casperjs/casperjs.sh && \
+  chmod 755 /srv/var/casperjs/casperjs.sh && \
+  ln -s /srv/var/casperjs/casperjs.sh /usr/bin/casperjs && \
+  apt-get autoremove -y && \
+  apt-get clean all
 
-  # Remove unused
-  rm -rf /etc/ssl /SHASUMS256.txt.asc /usr/include \
-    /usr/share/man /tmp/* /var/cache/apk/* /root/.npm /root/.node-gyp /root/.gnupg \
-    /usr/lib/node_modules/npm/man /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html
-
-# Create user www-data
-RUN addgroup -g 82 -S www-data && \
-	adduser -u 82 -D -S -G www-data www-data
-
-# Create work dir
-RUN mkdir -p /var/www/html && \
-    chown -R www-data:www-data /var/www
-
-WORKDIR /var/www/html
-VOLUME /var/www/html
-EXPOSE 8080
-
-CMD ["casperjs", "--engine", "slimerjs"]
+# Default command
+CMD ["/usr/bin/slimerjs"]
