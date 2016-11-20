@@ -11,7 +11,7 @@ ENV FIREFOX_VERSION_F 49.0.2
 RUN \
   apt-get update && \
   apt-get upgrade -y && \
-  apt-get install -y unzip git wget xvfb libxrender-dev libasound2 libdbus-glib-1-2 libgtk2.0-0 bzip2 python && \
+  apt-get install -y unzip git wget xvfb libxrender-dev libasound2 libdbus-glib-1-2 libgtk-3-0 bzip2 python && \
   mkdir -p /srv/var && \
   # Firefox
   wget -O /tmp/firefox-mozilla-build_$FIREFOX_VERSION_F-0ubuntu1_amd64.deb http://downloads.sourceforge.net/project/ubuntuzilla/mozilla/apt/pool/main/f/firefox-mozilla-build/firefox-mozilla-build_$FIREFOX_VERSION_F-0ubuntu1_amd64.deb && \
