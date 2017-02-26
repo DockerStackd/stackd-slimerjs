@@ -23,7 +23,7 @@ RUN \
   unzip /tmp/slimerjs-$SLIMERJS_VERSION_F.zip -d /tmp && \
   rm -f /tmp/slimerjs-$SLIMERJS_VERSION_F.zip && \
   mv /tmp/slimerjs-$SLIMERJS_VERSION_F/ /srv/var/slimerjs && \
-  echo '#!/bin/bash\nxvfb-run /srv/var/slimerjs/slimerjs "$@"' > /srv/var/slimerjs/slimerjs.sh && \
+  echo -e '#!/bin/bash\nxvfb-run /srv/var/slimerjs/slimerjs "$@"' > /srv/var/slimerjs/slimerjs.sh && \
   chmod 755 /srv/var/slimerjs/slimerjs.sh && \
   ln -s /srv/var/slimerjs/slimerjs.sh /usr/bin/slimerjs && \
   # CasperJS
@@ -31,7 +31,7 @@ RUN \
   unzip /tmp/casperjs-$CASPERJS_VERSION_F.zip -d /tmp && \
   rm -f /tmp/casperjs-$CASPERJS_VERSION_F.zip && \
   mv /tmp/casperjs-$CASPERJS_VERSION_F/ /srv/var/casperjs && \
-  echo '#!/bin/bash\n/srv/var/casperjs/bin/casperjs --engine=slimerjs "$@"' >> /srv/var/casperjs/casperjs.sh && \
+  echo -e '#!/bin/bash\n/srv/var/casperjs/bin/casperjs --engine=slimerjs "$@"' >> /srv/var/casperjs/casperjs.sh && \
   chmod 755 /srv/var/casperjs/casperjs.sh && \
   ln -s /srv/var/casperjs/casperjs.sh /usr/bin/casperjs && \
   # Cleanup
